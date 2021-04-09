@@ -20,10 +20,10 @@ const fileFilter = (request, file, callback) => {
 
 const upload = multer({ fileFilter, storage });
 
-router.post('/upload', upload.single('photo'), (req, res) => {
-  if (req.fileValidationError) {
-    return res.status(400).json({ Error: req.fileValidationError });
-  }
-  return res.status(201).json({ Success: true });
+router.post('/upload', upload.single('photo'), (request, response) => {
+  if (request.fileValidationError)
+    return response.status(400).json({ Error: request.fileValidationError });
+
+  return response.status(201).json({ Success: true });
 });
 module.exports = router;
